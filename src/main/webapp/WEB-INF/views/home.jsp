@@ -33,6 +33,12 @@
 
     
     [<a href="<c:url value="/logout" />">로그아웃</a>] 
+    
+    <!-- href="/aouth2/aouthorization/naver" 를 호출하면 provider의 authorization-uri호출  -->
+    <a href="/oauth2/authorization/kakao">카카오 로그인</a>
+	<a href="/oauth2/authorization/google ">구글 로그인</a>
+	<a href="/oauth2/authorization/naver ">네이버</a>
+    
 
 </h3>
 </body>

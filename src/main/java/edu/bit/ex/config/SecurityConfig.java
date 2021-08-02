@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import edu.bit.ex.security.CustomNoOpPasswordEncoder;
 import edu.bit.ex.security.EmpDetailsService;
+import edu.bit.ex.security.PrincipalOauth2UserService;
 
 @EnableWebSecurity
 @Configuration
@@ -21,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private EmpDetailsService empDetailsService;
 
+	@Autowired
+	private PrincipalOauth2UserService principalOauth2UserService;
+	
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/resources/**");
@@ -41,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout() // 8
 				.logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
 				.invalidateHttpSession(true) // 세션 날리기
+				.and()
+				.oauth2Login()
+				.loginPage("/login")
+				.userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때의 설정
+				.userService(principalOauth2UserService)
 		;
 	}
 
